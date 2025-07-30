@@ -24,9 +24,7 @@ app.post("/api/send", async (req, res) => {
   
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).send({
-      message: req.headers
-    });
+    res.status(200).send(req);
   } catch (err) {
     console.error(err);
     res.status(500).send({
