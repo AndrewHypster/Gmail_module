@@ -12,7 +12,7 @@ app.post("/api/send", async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
-  if (req.headers.api_key !== env.API_KEY) {
+  if (req.headers.api_key !== process.env.API_KEY) {
     return res.status(405).send({
       message: "Невірний api key :("
     });
