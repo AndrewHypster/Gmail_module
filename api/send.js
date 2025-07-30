@@ -20,7 +20,7 @@ app.post("/api/send", async (req, res) => {
     auth,
   });
   
-  const mailOptions = { from, to, subject, JSON.stringify(req) };
+  const mailOptions = { from, to, subject, text: JSON.stringify(req) };
   
   try {
     await transporter.sendMail(mailOptions);
