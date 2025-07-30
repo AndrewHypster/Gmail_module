@@ -24,7 +24,7 @@ app.post("/api/auth", async (req, res) => {
 
   const [ service, auth ] = req.headers
 
-  fetch("/api/send.js", {
+  fetch("https://gmail-module.vercel.app/api/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
