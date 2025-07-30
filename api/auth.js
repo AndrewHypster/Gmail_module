@@ -21,10 +21,41 @@ app.post("/api/auth", async (req, res) => {
       message: "Невірний api key :("
     });
   }
-  
-  return res.status(200).send({
-      message: "Успішно авторизовано!"
-    });
+
+  const [ service, auth ] = req.headers
+
+  fetch("/api/send.js", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      service, auth,
+      from: auth.user,
+      to: auth.user,
+      subject: "Make Gmail sender test",
+      text: "Авторизація пройшла успішно!"
+    }),
+  })
+    .then((req) => {
+      if (req.status == 200) {
+        return res.status(200).send({
+          status: "200",
+          message: "Авторизація пройшла успішно!"
+        });
+      } else {
+        return res.status(500).send({
+          status: "500",
+          message: "Невірні дані пошти"
+        });
+      }
+    })
+    .catch((err) =>
+      return res.status(500).send({
+        status: "500",
+        message: "Невірні дані пошти"
+      });
+}
 });
 
 app.listen(PORT, () => {
