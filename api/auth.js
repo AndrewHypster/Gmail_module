@@ -18,7 +18,10 @@ app.post("/api/auth", async (req, res) => {
   }
 
   const service = req.headers.service;
-  const auth = req.headers.auth;
+  const auth = {
+    user: req.headers.user,
+    pass: req.headers.pass
+};
 
   // створюємо транспорт
   const transporter = nodemailer.createTransport({
