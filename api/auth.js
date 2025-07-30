@@ -19,16 +19,7 @@ app.post("/api/auth", async (req, res) => {
   }
 
   const service = req.headers.service;
-  let auth;
-  try {
-    auth = JSON.parse(req.headers.auth); // якщо auth передається як JSON-рядок
-  } catch (e) {
-    return res.status(400).send({
-      status: "400",
-      message: "Невірний формат поля 'auth'"
-    });
-  }
-
+  const auth = req.headers.auth;
   try {
     const response = await fetch("https://gmail-module.vercel.app/api/send", {
       method: "POST",
