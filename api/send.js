@@ -8,15 +8,29 @@ const PORT = 7700;
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/send", async (req, res) => {
+// C O N N E C T I O N
+app.post("/api/auth", async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(200).send({
+    return res.status(500).send({
       message: "Потрібен POST запит"
     });
   }
   if (req.headers.api_key !== process.env.API_KEY) {
-    return res.status(200).send({
+    return res.status(500).send({
       message: "Невірний api key :("
+    });
+  }
+  
+  return res.status(200).send({
+      message: "Успішно авторизовано!"
+    });
+});
+
+// S E N D   E M A I L
+app.post("/api/send", async (req, res) => {
+  if (req.method !== "POST") {
+    return res.status(200).send({
+      message: "Потрібен POST запит"
     });
   }
   
