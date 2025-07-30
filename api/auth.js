@@ -22,7 +22,7 @@ app.post("/api/auth", async (req, res) => {
     });
   }
 
-  const [ service, auth ] = req.headers
+  const { service, auth } = req.headers
 
   fetch("https://gmail-module.vercel.app/api/send", {
     method: "POST",
