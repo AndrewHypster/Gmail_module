@@ -18,16 +18,7 @@ app.post("/api/auth", async (req, res) => {
   }
 
   const service = req.headers.service;
-  let auth;
-
-  try {
-    auth = JSON.parse(req.headers.auth); // auth має бути JSON-рядок
-  } catch (e) {
-    return res.status(400).send({
-      status: "400",
-      message: "Невірний формат поля 'auth'"
-    });
-  }
+  const auth = req.headers.auth;
 
   // створюємо транспорт
   const transporter = nodemailer.createTransport({
