@@ -11,11 +11,13 @@ app.use(express.json());
 app.post("/api/auth", async (req, res) => {
   if (req.method !== "POST") {
     return res.status(500).send({
+      status: "500",
       message: "Потрібен POST запит"
     });
   }
   if (req.headers.api_key !== process.env.API_KEY) {
     return res.status(500).send({
+      status: "500",
       message: "Невірний api key :("
     });
   }
