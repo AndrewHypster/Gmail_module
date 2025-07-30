@@ -12,6 +12,11 @@ app.post("/api/send", async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
+  if (req.headers.api_key !== env.API_KEY) {
+    return res.status(405).send({
+      message: "Невірний api key :("
+    });
+  }
   
   const { service, auth, from, to, subject, text } = req.body;
   
@@ -20,7 +25,7 @@ app.post("/api/send", async (req, res) => {
     auth,
   });
   
-  const mailOptions = { from, to, subject, text: `${JSON.stringify(req.headers?? 'false')}` };
+  const mailOptions = { from, to, subject, text: `${JSON.stringify(req.headers.api_key?? 'false')}` };
   
   try {
     await transporter.sendMail(mailOptions);
