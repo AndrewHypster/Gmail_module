@@ -10,10 +10,12 @@ app.use(express.json());
 
 app.post("/api/send", async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(405).send("Method Not Allowed");
+    return res.status(200).send({
+      message: "Потрібен POST запит"
+    });
   }
   if (req.headers.api_key !== process.env.API_KEY) {
-    return res.status(405).send({
+    return res.status(200).send({
       message: "Невірний api key :("
     });
   }
@@ -34,7 +36,7 @@ app.post("/api/send", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).send({
+    res.status(200).send({
       message: "Помилка при відправці листа. Провірте дані що ви надіслали!"
     });
   }
