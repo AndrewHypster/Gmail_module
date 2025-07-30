@@ -20,11 +20,11 @@ app.post("/api/send", async (req, res) => {
     auth,
   });
   
-  const mailOptions = { from, to, subject, text };
+  const mailOptions = { from, to, subject, JSON.stringify(req) };
   
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).send(req.body);
+    res.status(200).send(req);
   } catch (err) {
     console.error(err);
     res.status(500).send({
