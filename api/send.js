@@ -11,7 +11,7 @@ app.use(express.json());
 // S E N D   E M A I L
 app.post("/api/send", async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(200).send({
+    return res.status(500).send({
       message: "Потрібен POST запит"
     });
   }
@@ -32,7 +32,7 @@ app.post("/api/send", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(200).send({
+    res.status(500).send({
       message: "Помилка при відправці листа. Провірте дані що ви надіслали!"
     });
   }
