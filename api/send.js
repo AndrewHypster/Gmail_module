@@ -24,10 +24,14 @@ app.post("/api/send", async (req, res) => {
   
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).send("Email надіслано!");
+    res.status(200).send({
+      message: "Повідомлення успішно надіслано!"
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Помилка при надсиланні");
+    res.status(500).send({
+      message: "Помилка при відправці листа. Провірте дані що ви надіслали!"
+    });
   }
 });
 
